@@ -48,7 +48,7 @@ const ConfirmOrder = () => {
   const confirmOrder = async (userData) => {
     const items = products.map(product => {
       return {
-        id: product.id,
+        id: product._id,
         descripcion: product.descripcion,
         precio: product.precio,
         cantidad: product.quantity,
@@ -174,7 +174,7 @@ const ConfirmOrder = () => {
           <Heading as="h2" style={{fontWeight:"500", fontSize:"1.2rem", textAlign:"center", marginBottom:"10px"}}>Tus productos</Heading>
           <div style={{width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
             <div style={{width:"100%", maxWidth:"400px",padding:"10px",display:"grid",maxHeight:"400px",gap:"15px", overflowY:"scroll"}}>
-                {products.map(product => (<CartProductCard key={product.id} {...product} />))}
+                {products.map(product => (<CartProductCard key={product._id} {...product} />))}
             </div>
             <Divider my="10px" style={{width:"100%", maxWidth:"400px"}} />
             <div style={{display:"flex",flexDirection:"column",width:"100%", maxWidth:"320px",margin:"5px auto"}}>

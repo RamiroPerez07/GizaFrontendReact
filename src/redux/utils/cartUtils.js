@@ -1,7 +1,7 @@
 export const addProductToCart = (product, cartProducts) => {
-  const existingProduct = cartProducts.find(cartProduct => cartProduct.id === product.id)
+  const existingProduct = cartProducts.find(cartProduct => cartProduct._id === product._id)
   if (existingProduct){
-    return cartProducts.map(cartProduct => cartProduct.id === existingProduct.id ? {...cartProduct, quantity: cartProduct.quantity + 1} : cartProduct)
+    return cartProducts.map(cartProduct => cartProduct._id === existingProduct._id ? {...cartProduct, quantity: cartProduct.quantity + 1} : cartProduct)
   }
   return [...cartProducts, {...product, quantity: 1}]
 };
@@ -11,7 +11,7 @@ export const decreaseProductFromCart = (product, cartProducts) => {
     return removeProductFromCart(product, cartProducts);
   } else {
     return cartProducts.map(cartProduct => {
-      return (cartProduct.id === product.id) ? 
+      return (cartProduct._id === product._id) ? 
       {...cartProduct, quantity: cartProduct.quantity - 1} :
       cartProduct;
     })
@@ -19,7 +19,7 @@ export const decreaseProductFromCart = (product, cartProducts) => {
 };
 
 export const removeProductFromCart = (product,cartProducts) => {
-  return cartProducts.filter(cartProduct => cartProduct.id !== product.id)
+  return cartProducts.filter(cartProduct => cartProduct._id !== product._id)
 }
 
 export const removeAllProductsFromCart = () => {

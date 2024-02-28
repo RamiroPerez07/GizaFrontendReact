@@ -13,7 +13,7 @@ const CartProductCard = (props) => {
 
   const dispatch = useDispatch()
 
-  const {id,descripcion, precio, imagen, quantity} = props
+  const {_id,descripcion, precio, imagen, quantity} = props
 
 
 
@@ -39,7 +39,7 @@ const CartProductCard = (props) => {
                 aria-label='Menos'
                 icon={<CgMathMinus />} 
                 style={{minWidth:"auto",width:"22px",height:"22px",margin:"3px"}}
-                onClick = {() => dispatch(decreaseProductFromCart({id,descripcion, precio, imagen}))}
+                onClick = {() => dispatch(decreaseProductFromCart({_id,descripcion, precio, imagen}))}
               />:
               <IconButton 
                 colorScheme='red'
@@ -55,7 +55,7 @@ const CartProductCard = (props) => {
               aria-label='Mas'
               icon={<CgMathPlus />} 
               style={{minWidth:"auto",width:"22px",height:"22px",margin:"3px"}}
-              onClick = {() => dispatch(addProductToCart({id,descripcion, precio, imagen}))}
+              onClick = {() => dispatch(addProductToCart({_id,descripcion, precio, imagen}))}
             />
           </div>
         </div>
@@ -83,7 +83,7 @@ const CartProductCard = (props) => {
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>Cancelar</Button>
-              <Button colorScheme='red' onClick={() => {onClose();dispatch(removeProductFromCart({id,descripcion, precio, imagen, quantity}))}} ml={3}>Si</Button>
+              <Button colorScheme='red' onClick={() => {onClose();dispatch(removeProductFromCart({_id,descripcion, precio, imagen, quantity}))}} ml={3}>Si</Button>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>

@@ -53,7 +53,7 @@ const ShoppingCartButton = () => {
           <DrawerHeader>Tus Productos</DrawerHeader>
           <DrawerBody>
             <div style={{width:"100%",padding:"10px",display:"grid",maxHeight:"400px",gap:"15px"}}>
-              {products.map(product => (<CartProductCard key={product.id} {...product} />))}
+              {products.map(product => (<CartProductCard key={product._id} {...product} />))}
             </div>
           </DrawerBody>
 
