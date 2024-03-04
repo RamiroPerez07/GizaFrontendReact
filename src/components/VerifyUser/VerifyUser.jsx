@@ -34,7 +34,7 @@ const VerifyUser = () => {
           onSubmit={ async (values, actions) => {
             const {code} = values
             const email = location.state.email
-            const response = await verifyUser(email,code);
+            const response = await verifyUser(String(email).toLowerCase(),code);
 
             if (response.status === 200) {
 

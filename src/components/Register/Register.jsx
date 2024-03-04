@@ -30,7 +30,7 @@ const Register = () => {
           onSubmit={ async (values, actions) => {
             const {usuarioNombre,email,password} = values
 
-            const response = await createUser(usuarioNombre,email,password)
+            const response = await createUser(usuarioNombre,String(email).toLowerCase(),password)
             
             console.log(response)
 

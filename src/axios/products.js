@@ -24,6 +24,30 @@ export const createProduct = async (product, currentUser) => {
   }
 };
 
+export const editProduct = async (product, currentUser) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/products/edit-product`, {
+      _id: product._id,
+      descripcion: product.descripcion,
+      marca: product.marca,
+      categoria: product.categoria,
+      precio: product.precio,
+      imagen: product.imagen,
+      descuento: product.descuento,
+      estado: product.estado,
+    },
+    {
+      headers: {
+        "x-token" : currentUser.token,
+      }
+    })
+
+    return response
+  } catch (error) {
+    return error
+  }
+}
+
 
 export const getProducts = async () => {
   try {

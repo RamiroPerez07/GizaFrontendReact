@@ -27,7 +27,7 @@ const ForgotPassword = () => {
           onSubmit={async (values, actions) => {
             const {email} = values
 
-            const response = await forgotPassword(email);
+            const response = await forgotPassword(String(email).toLowerCase());
 
             if (response.status === 200){
 

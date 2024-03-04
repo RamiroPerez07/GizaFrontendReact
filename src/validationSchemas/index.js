@@ -89,4 +89,16 @@ export const newProductSchema = Yup.object().shape(
     descuento: Yup.number(),
     estado: Yup.string(),
   }
-)
+) 
+
+export const editProductSchema = Yup.object().shape(
+  {
+    descripcion: Yup.string().required("La descripción es requerida"),
+    marca: Yup.string().required("La marca es requerida"),
+    categoria: Yup.string().required("La categoria es requerida"),
+    precio: Yup.number().required("El precio es requerido"),
+    imagen: Yup.string(),
+    descuento: Yup.number(),
+    estado: Yup.string(),
+  }
+) 

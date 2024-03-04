@@ -32,7 +32,7 @@ const Login = () => {
           onSubmit={async (values, actions) => {
             const {email, password} = values
 
-            const response = await loginUser(email, password);
+            const response = await loginUser(String(email).toLowerCase(), password);
 
             if (response.status === 202){
               dispatch(setCurrentUser({...response.data.usuario,token: response.data.token}));

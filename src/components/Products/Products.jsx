@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import { StyledProductsContainer, StyledProductsWrapper } from './ProductsStyles'
 import { FormControl, Input, IconButton, FormErrorMessage, FormLabel, InputGroup, InputRightElement, useToast, Stack, Skeleton, Alert, AlertIcon, List, ListItem, ListIcon } from '@chakra-ui/react'
 import { FaSearch,  } from "react-icons/fa";
@@ -35,6 +35,7 @@ import { createProduct, filterProducts, getProducts } from '../../axios/products
 import { errors } from '../../errors';
 import { setCurrentUser } from '../../redux/actions/userActions';
 import { useNavigate } from 'react-router-dom';
+import { ProductFilterContext } from '../../contexts/productContext';
 
 const Products = () => {
 
@@ -57,17 +58,32 @@ const Products = () => {
     marginBottom: "25px"
   }
 
-  const [products , setProducts] = useState({items: []})
+  const productFilterData = useContext(ProductFilterContext);
+  const { products, 
+          setProducts, 
+          isLoadingProducts, 
+          setIsLoadingProducts, 
+          filterData, 
+          setFilterData, 
+          filterParams,
+          filterActive,
+          setFilterActive,
+          setFilterParams,
+          fetchAllProducts,
+          filterProductsByParams,
+        } = productFilterData;
 
-  const [isLoadingProducts, setIsLoadingProducts] = useState(false)
+  // const [products , setProducts] = useState({items: []})
 
-  const [filterData, setFilterData] = useState({brands: [], categories: []})
+  // const [isLoadingProducts, setIsLoadingProducts] = useState(false)
 
-  const initialStateFilter = {categoria: "", marca: "", precioEntre: [0,100000], descripcion: ""}
-  const [filterParams, setFilterParams] = useState(initialStateFilter)
+  // const [filterData, setFilterData] = useState({brands: [], categories: []})
 
-  const initialStateFilterActive = {categoria: false, marca: false, precioEntre: false, descripcion: false}
-  const [filterActive, setFilterActive] = useState(initialStateFilterActive)
+  // const initialStateFilter = {categoria: "", marca: "", precioEntre: [0,100000], descripcion: ""}
+  // const [filterParams, setFilterParams] = useState(initialStateFilter)
+
+  // const initialStateFilterActive = {categoria: false, marca: false, precioEntre: false, descripcion: false}
+  // const [filterActive, setFilterActive] = useState(initialStateFilterActive)
 
   const searchRef = useRef(null)
 
@@ -99,57 +115,57 @@ const Products = () => {
 
   }, [] /* Solo cuando el componente se monta, por eso arr vacio */)
 
-  const fetchAllProducts = async () => {
-    setIsLoadingProducts(true);
-      const response = await getProducts();
+  // const fetchAllProducts = async () => {
+  //   setIsLoadingProducts(true);
+  //     const response = await getProducts();
 
-      if (response.status === 200) {
-        setProducts({items: response.data.data})
-        setIsLoadingProducts(false);
-        setFilterParams(initialStateFilter);
-        setFilterActive(initialStateFilterActive);
-        return;
-      }
-      alert("Ha ocurrido un error en la carga de los productos")
-  }
+  //     if (response.status === 200) {
+  //       setProducts({items: response.data.data})
+  //       setIsLoadingProducts(false);
+  //       setFilterParams(initialStateFilter);
+  //       setFilterActive(initialStateFilterActive);
+  //       return;
+  //     }
+  //     alert("Ha ocurrido un error en la carga de los productos")
+  // }
 
-  const filterProductsByParams = async (values) => {
-    const filter = async () => {
-      setIsLoadingProducts(true);
-      const response = await filterProducts({...values});
+  // const filterProductsByParams = async (values) => {
+  //   const filter = async () => {
+  //     setIsLoadingProducts(true);
+  //     const response = await filterProducts({...values});
 
-      if (response.status === 200) {
-        setProducts({items: response.data.data})
-        setIsLoadingProducts(false);
-        return
-      } 
+  //     if (response.status === 200) {
+  //       setProducts({items: response.data.data})
+  //       setIsLoadingProducts(false);
+  //       return
+  //     } 
 
-      alert("Ha ocurrido un error en la carga de los productos")
-    }
+  //     alert("Ha ocurrido un error en la carga de los productos")
+  //   }
 
-    filter()
+  //   filter()
     
-    let optionChosen = {}
+  //   let optionChosen = {}
 
-    if (values.descripcion !== ""){
-      optionChosen = {...optionChosen, descripcion: true}
-    } 
-    if (values.categoria !== ""){
-      optionChosen = {...optionChosen, categoria: true}
-    } 
-    if (values.marca !== "") {
-      optionChosen = {...optionChosen, marca: true}
-    }
-    if (values.precioEntre[0] !== 0 || values.precioEntre[1] !== 100000){
-      optionChosen = {...optionChosen, precioEntre: true}
-    }
+  //   if (values.descripcion !== ""){
+  //     optionChosen = {...optionChosen, descripcion: true}
+  //   } 
+  //   if (values.categoria !== ""){
+  //     optionChosen = {...optionChosen, categoria: true}
+  //   } 
+  //   if (values.marca !== "") {
+  //     optionChosen = {...optionChosen, marca: true}
+  //   }
+  //   if (values.precioEntre[0] !== 0 || values.precioEntre[1] !== 100000){
+  //     optionChosen = {...optionChosen, precioEntre: true}
+  //   }
 
-    console.log(optionChosen)
+  //   console.log(optionChosen)
 
-    setFilterParams(values);
-    setFilterActive({...initialStateFilterActive, ...optionChosen})
+  //   setFilterParams(values);
+  //   setFilterActive({...initialStateFilterActive, ...optionChosen})
 
-  }
+  // }
 
   return (
     <StyledProductsContainer style={{padding: "15px"}}>
@@ -294,7 +310,6 @@ const Products = () => {
               validationSchema={newProductSchema}
               onSubmit={ async (values, actions)=>{
                 try {
-
                   const response = await createProduct({...values},user) ;
             
                   console.log("El resultado de la respuesta es ==> ", response)
@@ -307,9 +322,9 @@ const Products = () => {
                       duration: "2500",
                       isClosable: true,
                     })
-
+  
                     onCloseNew();
-
+  
                     const fetchAllProducts = async () => {
                       setIsLoadingProducts(true);
                       const response = await getProducts();
@@ -326,7 +341,7 @@ const Products = () => {
                           return arr.indexOf(category) === index;
                         })
                         setFilterData({brands: marcas, categories: categorias})
-
+  
                         setIsLoadingProducts(false);
                         return
                       } 
@@ -350,7 +365,7 @@ const Products = () => {
                     dispatch(setCurrentUser(null)); //se desloguea el usuario
                     navigate("/iniciar-sesion");
                   }
-
+  
                   if (response.response.data.msg === errors.USUARIO_NO_ADMINISTRADOR){
                     toast({
                       title: ``,
@@ -369,6 +384,7 @@ const Products = () => {
                   alert(error)
                   return error
                 }
+
 
                 actions.setSubmitting(false)
                 actions.resetForm();
