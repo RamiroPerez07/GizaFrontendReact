@@ -82,10 +82,10 @@ const ProductCard = (props) => {
           <Text as="b" color='giza.500' fontSize='s'>$ {formatPrice(precio)}</Text>
         </Stack>
       </CardBody>
-      <Divider />
+      <Divider borderColor='gray.300' />
       <CardFooter style={{padding:"15px",display:"flex",justifyContent:"center",alignItems:"center"}}>
         <ButtonGroup spacing='1'>
-          <Button leftIcon={<FaCartPlus />} colorScheme='giza' _hover={{bg:"#0087BF"}} variant='solid' size="sm" onClick={()=>addProduct({_id,descripcion,precio,imagen,marca})}>
+          <Button leftIcon={<FaCartPlus />} colorScheme='giza' _hover={{bg:"giza.700"}} variant='solid' size="sm" onClick={()=>addProduct({_id,descripcion,precio,imagen,marca})}>
             Agregar al carrito
           </Button>
         </ButtonGroup>
@@ -245,7 +245,7 @@ const ProductCard = (props) => {
                   </Field>
                   </ModalBody>
                   <ModalFooter>
-                    <Button size='sm' colorScheme='teal' mr={3} isLoading={props.isSubmitting} type="submit">Guardar</Button>
+                    <Button size='sm' colorScheme='giza' _hover={{bg:"giza.700"}} mr={3} isLoading={props.isSubmitting} type="submit">Guardar</Button>
                     <Button size='sm' variant='ghost' onClick={onClose}>Cancelar</Button>
                   </ModalFooter>
                 </Form>

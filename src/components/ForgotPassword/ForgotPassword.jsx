@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyledLoginContainer, StyledLoginFrame } from '../Login/Login.js'
-import { Divider, Heading, Button, FormControl, FormLabel, Input, FormErrorMessage, Avatar, useToast, Text, Stack } from '@chakra-ui/react'
+import { Divider, Heading, Button, FormControl, FormLabel, Input, FormErrorMessage, Avatar, useToast, Text, Stack, Image } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
 import { forgotPasswordSchema } from '../../validationSchemas'
 import { forgotPassword } from '../../axios/users'
+import { BRAND_IMAGES } from '../../utils/constants.js'
 
 
 const ForgotPassword = () => {
@@ -13,7 +14,7 @@ const ForgotPassword = () => {
   return (
     <StyledLoginContainer>
       <StyledLoginFrame>
-        <Avatar src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367275/Perfarm/bg_abstract_nkcbrw.png' name="Imagen de Giza" size="md" mt="10px"/>
+        <Image src={BRAND_IMAGES.logoVertical} alt="Imagen de Giza" h="3rem" mt="10px"/>
         <Heading as="h2" my="15px" style={{fontSize:"1.2rem", fontWeight:"500"}}>Recuperar Clave</Heading>
         <Stack my="5px" p="5px">
           <Text fontSize="0.8rem" textAlign="center">Te enviaremos un correo al siguiente mail para recuperar tu contraseña. Por favor, revisá la casilla "No deseados".</Text>
@@ -76,7 +77,7 @@ const ForgotPassword = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button my="20px" colorScheme='teal' isLoading={props.isSubmitting} type='submit'>Enviar</Button>
+              <Button my="20px" colorScheme='giza' _hover={{bg:"giza.700"}} isLoading={props.isSubmitting} type='submit'>Enviar</Button>
             </Form>
           )}
         </Formik>

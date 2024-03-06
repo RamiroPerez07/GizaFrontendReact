@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import UserProfile from '../UserProfile/UserProfile.jsx';
+import { BRAND_IMAGES } from '../../utils/constants.js';
 
 
 const Header = () => {
@@ -24,7 +25,7 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledHeaderContent>
-          <Image src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1709693839/logo_Giza_btneu2.png' name="Imagen de Giza" boxSize="12" objectFit="contain" />
+          <Image src={BRAND_IMAGES.logoHorizontalCompleto} name="Imagen de Giza" h="2.3rem" objectFit="contain" />
           <StyledNavbar>
             <StyledNavbarContent>
               <NavbarItem className={({ isActive }) => (isActive ? "active" : "")} to={"/"}>Inicio</NavbarItem>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { StyledProductsContainer } from '../Products/ProductsStyles'
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Divider, FormControl, FormErrorMessage, FormLabel, Heading, Input, Text, useDisclosure, useToast } from '@chakra-ui/react'
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Divider, FormControl, FormErrorMessage, FormLabel, Heading, Input, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import { confirmOrderSchema } from '../../validationSchemas'
 import CartProductCard from '../ShoppingCart/CartProductCard'
@@ -8,6 +8,7 @@ import { /*useDispatch,*/ useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createOrder } from '../../axios/orders'
 import { errors } from '../../errors'
+import { StyledConfirmWrapper } from './ConfirmOrder.js'
 
 
 
@@ -111,10 +112,12 @@ const ConfirmOrder = () => {
   
 
   return (
+    <>
+    <Heading as="h2" my="20px" style={{fontSize: "1.2rem",fontWeight: "500",textAlign: "center"}}>Completá el formulario</Heading>
     <StyledProductsContainer>
-      <div style={{display:"flex", flexDirection:"row", width:"100%", padding:"10px",justifyContent:"center"}}>
-        <div style={{width:"90%", maxWidth:"450px",minWidth:"400px", display:"flex", flexDirection:"column", alignItems:"center", marginTop:"10px"}}>
-          <Heading as="h2" style={{fontWeight:"500", fontSize:"1.2rem", textAlign:"center", marginBottom:"10px"}}>Ingresá tus datos</Heading>
+      <StyledConfirmWrapper>
+        <Box w="full" maxW="450px" mt="10px" style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+          <Heading as="h2" textAlign={{base:"left",sm:"center"}} w="full" style={{fontWeight:"500", fontSize:"1.1rem", textAlign:"center", marginBottom:"10px"}}>Ingresá tus datos</Heading>
           <Formik
             initialValues={{ 
                 contacto: "",
@@ -165,33 +168,33 @@ const ConfirmOrder = () => {
                     </FormControl>
                   )}
                 </Field>
-                <Button my="20px" colorScheme='teal' isLoading={props.isSubmitting} type='submit'>Confirmar</Button>
+                <Button my="20px" colorScheme='giza' _hover={{bg:"giza.700"}} isLoading={props.isSubmitting} type='submit'>Confirmar</Button>
               </Form>
             )}
           </Formik>
-        </div>
-        <div style={{width:"90%", maxWidth:"450px"}}>
-          <Heading as="h2" style={{fontWeight:"500", fontSize:"1.2rem", textAlign:"center", marginBottom:"10px"}}>Tus productos</Heading>
-          <div style={{width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
+        </Box>
+        <Box w="full" maxWidth="450px">        
+          <Heading as="h2" w="full" style={{fontWeight:"500", fontSize:"1.1rem", textAlign:"center", marginBottom:"10px"}}>Tus productos</Heading>
+          <div style={{width:"100%", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
             <div style={{width:"100%", maxWidth:"400px",padding:"10px",display:"grid",maxHeight:"400px",gap:"15px", overflowY:"scroll"}}>
                 {products.map(product => (<CartProductCard key={product._id} {...product} />))}
             </div>
             <Divider my="10px" style={{width:"100%", maxWidth:"400px"}} />
-            <div style={{display:"flex",flexDirection:"column",width:"100%", maxWidth:"320px",margin:"5px auto"}}>
+            <div style={{display:"flex",flexDirection:"column",alignItems:"center",width:"100%", maxWidth:"320px",margin:"5px auto"}}>
               {/*
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"100%",margin:"5px 0px"}}>
                 <Text>Subtotal</Text>
                 <Text>$ 1000</Text>
               </div>
               */}
-              <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"100%"}}>
+              <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"100%", maxWidth:"250px"}}>
                 <Text as="b">Total</Text>
                 <Text as="b">$ {subtotal}</Text>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </Box>
+      </StyledConfirmWrapper>
       
       {/* Alerta */}
       <AlertDialog
@@ -216,6 +219,7 @@ const ConfirmOrder = () => {
         </AlertDialog>
 
     </StyledProductsContainer>
+    </>
   )
 }
 

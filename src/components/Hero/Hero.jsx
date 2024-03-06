@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyledHeroContainer } from './HeroStyles'
 import { Box, Image } from '@chakra-ui/react'
+import { BRAND_IMAGES } from '../../utils/constants'
 
 const Hero = () => {
 
@@ -20,7 +21,7 @@ const Hero = () => {
   return (
     <StyledHeroContainer>
       <Box boxSize='3xs' mt="15px">
-        <Image src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1709693837/logo_Giza_Completo_nlkgrr.png' alt='Logo Giza Completo' objectFit="contain" />
+        <Image src={BRAND_IMAGES.logoVerticalCompleto} alt='Logo Giza Completo' objectFit="contain" />
       </Box>
     </StyledHeroContainer>
   )

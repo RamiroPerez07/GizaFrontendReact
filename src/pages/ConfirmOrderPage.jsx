@@ -1,4 +1,4 @@
-import ConfirmOrder from "../components/ConfirmOrder/ConfirmOrder";
+import ConfirmOrder from "../components/ConfirmOrder/ConfirmOrder.jsx";
 import React from 'react'
 
 const ConfirmOrderPage = () => {

@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyledLoginContainer, StyledLoginFrame } from '../Login/Login'
-import { Avatar, Button, Divider, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
+import { Avatar, Button, Divider, FormControl, FormErrorMessage, FormLabel, Heading, Image, Input, useToast } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import { registerSchema } from '../../validationSchemas'
 import { Link, useNavigate } from 'react-router-dom'
 import { createUser } from '../../axios/users'
 import { errors } from '../../errors'
+import { BRAND_IMAGES } from '../../utils/constants'
 
 const Register = () => {
 
@@ -16,7 +17,7 @@ const Register = () => {
   return (
     <StyledLoginContainer>
       <StyledLoginFrame>
-      <Avatar src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367275/Perfarm/bg_abstract_nkcbrw.png' name="Imagen de Giza" size="md" mt="10px"/>
+      <Image src={BRAND_IMAGES.logoVertical} alt="Imagen de Giza" h="3rem" mt="10px"/>
         <Heading as="h2" my="15px" style={{fontSize:"1.2rem", fontWeight:"500"}}>Registro</Heading>
         <Divider />
         <Formik
@@ -104,7 +105,7 @@ const Register = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button my="20px" colorScheme='teal' isLoading={props.isSubmitting} type='submit'>Ingresar</Button>
+              <Button my="20px" colorScheme='giza' _hover={{bg:"giza.700"}} isLoading={props.isSubmitting} type='submit'>Registrar</Button>
               <div style={{marginBottom:"15px"}}>
                 <p>¿Ya tienes una cuenta? <Link to={"/iniciar-sesion"} style={{fontWeight:"700"}}>Iniciar</Link></p>
               </div>

@@ -60,6 +60,8 @@ export const NavbarItem = styled(NavLink)`
 
     &.active{
         font-weight: 500;
+        border-bottom: 1px solid;
+        transition: 200ms;
     }
 `
 

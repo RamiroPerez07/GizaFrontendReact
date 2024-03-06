@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyledLoginContainer, StyledLoginFrame } from '../Login/Login.js'
-import { Avatar, Button, Divider, FormControl, FormErrorMessage, FormLabel, Heading, Input, Text, useToast, /*useToast*/ } from '@chakra-ui/react'
+import { Avatar, Button, Divider, FormControl, FormErrorMessage, FormLabel, Heading, Image, Input, Text, useToast, /*useToast*/ } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import { restorePasswordSchema } from '../../validationSchemas'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { getUserByTokenId, recoveryPassword } from '../../axios/users.js'
 import { setCurrentUser } from '../../redux/actions/userActions.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { errors } from '../../errors/index.js'
+import { BRAND_IMAGES } from '../../utils/constants.js'
 
 
 const RestorePassword = () => {
@@ -53,7 +54,7 @@ const RestorePassword = () => {
   return (
     <StyledLoginContainer>
       <StyledLoginFrame>
-      <Avatar src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367275/Perfarm/bg_abstract_nkcbrw.png' name="Imagen de Giza" size="md" mt="10px"/>
+      <Image src={BRAND_IMAGES.logoVertical} alt="Imagen de Giza" h="3rem" mt="10px"/>
         <Heading as="h2" my="15px" style={{fontSize:"1.2rem", fontWeight:"500"}}>Restablecer contraseña</Heading>
         {user && <Text my="5px" fontWeight="300" fontSize="0.9rem">{user.email}</Text>}
         <Divider />
@@ -129,7 +130,7 @@ const RestorePassword = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button my="20px" colorScheme='teal' isLoading={props.isSubmitting} type='submit'>Aceptar</Button>
+              <Button my="20px" colorScheme='giza' _hover={{bg:"giza.700"}} isLoading={props.isSubmitting} type='submit'>Aceptar</Button>
             </Form>
           )}
         </Formik>

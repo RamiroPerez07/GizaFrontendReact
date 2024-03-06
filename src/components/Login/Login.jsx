@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledLoginContainer, StyledLoginFrame } from './Login'
-import { Divider, Heading, Button, FormControl, FormLabel, Input, FormErrorMessage, Avatar, useToast, Text } from '@chakra-ui/react'
+import { Divider, Heading, Button, FormControl, FormLabel, Input, FormErrorMessage, useToast, Text, Image } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
 import { loginSchema } from '../../validationSchemas'
 import { Link, useNavigate } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { loginUser } from '../../axios/users'
 import { useDispatch } from 'react-redux'
 import { setCurrentUser } from '../../redux/actions/userActions'
 import { removeAllProductsFromCart } from '../../redux/actions/cartActions'
+import { BRAND_IMAGES } from '../../utils/constants'
 
 const Login = () => {
 
@@ -20,9 +21,9 @@ const Login = () => {
   return (
     <StyledLoginContainer>
       <StyledLoginFrame>
-        <Avatar src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367275/Perfarm/bg_abstract_nkcbrw.png' name="Imagen de Giza" size="md" mt="10px"/>
+        <Image src={BRAND_IMAGES.logoVertical} alt="Imagen de Giza" h="3rem" mt="10px"/>
         <Heading as="h2" my="15px" style={{fontSize:"1.2rem", fontWeight:"500"}}>Iniciar Sesión</Heading>
-        <Divider />
+        <Divider borderColor="giza.50" />
         <Formik
           initialValues={{ 
               email: "", 
@@ -92,7 +93,7 @@ const Login = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button my="20px" colorScheme='teal' isLoading={props.isSubmitting} type='submit'>Ingresar</Button>
+              <Button my="20px" colorScheme='giza' _hover={{bg:"giza.700"}} isLoading={props.isSubmitting} type='submit'>Ingresar</Button>
               <div style={{marginBottom:"15px", display: "grid", placeItems:"center"}}>
                 <Link to={"/olvide-mi-clave"} style={{margin:"8px auto", fontSize:"0.8rem"}}>Olvidé mi contraseña</Link>
                 <Text fontSize="0.9rem">¿Aun no tienes una cuenta? <Link to={"/registro"} style={{fontWeight:"700"}}>Registrate</Link></Text>

@@ -54,7 +54,7 @@ const CartProductCard = (props) => {
             <Text fontSize='sm' w="20px" textAlign="center">{quantity}</Text>
             <IconButton 
               colorScheme='giza'
-              _hover={{bg:"#0087BF"}}
+              _hover={{bg:"giza.700"}}
               aria-label='Mas'
               icon={<CgMathPlus />} 
               style={{minWidth:"auto",width:"22px",height:"22px",margin:"3px"}}

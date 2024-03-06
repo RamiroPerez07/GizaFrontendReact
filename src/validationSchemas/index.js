@@ -8,6 +8,7 @@ export const loginSchema = Yup.object().shape(
     .matches(/[0-9]/, 'La contraseña requiere un número')
     .matches(/[a-z]/, 'La contraseña requiere al menos una letra minúscula')
     .matches(/[A-Z]/, 'La contraseña requiere al menos una letra mayúscula')
+    .required("La contraseña es requerida")
   }
 )
 

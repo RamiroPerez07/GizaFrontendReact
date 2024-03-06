@@ -267,12 +267,12 @@ const Products = () => {
                         <FormControl isInvalid={form.errors.precioEntre && form.touched.precioEntre} my="15px">
                         <FormLabel fontSize="xs">Precio</FormLabel>
                         <Text fontSize="sm">{`Entre $ ${field?.value[0]} y $ ${field?.value[1]}`}</Text>
-                        <RangeSlider size="sm" colorScheme='teal' step={1000} min={0} max={100000} defaultValue={[field?.value[0], field?.value[1]]} onChange={(e)=>{props.setFieldValue("precioEntre", e)}}>
+                        <RangeSlider size="sm" colorScheme='giza' step={1000} min={0} max={100000} defaultValue={[field?.value[0], field?.value[1]]} onChange={(e)=>{props.setFieldValue("precioEntre", e)}}>
                           <RangeSliderTrack>
                             <RangeSliderFilledTrack />
                           </RangeSliderTrack>
-                          <RangeSliderThumb index={0} />
-                          <RangeSliderThumb index={1} />
+                          <RangeSliderThumb bg="giza.700" index={0} />
+                          <RangeSliderThumb bg="giza.700" index={1} />
                         </RangeSlider>
                         <FormErrorMessage>{form.errors.precioEntre}</FormErrorMessage>
                       </FormControl>
@@ -280,7 +280,7 @@ const Products = () => {
                   </Field>
                   </ModalBody>
                   <ModalFooter>
-                    <Button size='sm' colorScheme='teal' mr={3} isLoading={props.isSubmitting} type="submit" onClick={onClose}>Aplicar</Button>
+                    <Button size='sm' colorScheme='giza' _hover={{bg:"giza.700"}} mr={3} isLoading={props.isSubmitting} type="submit" onClick={onClose}>Aplicar</Button>
                     <Button size='sm' variant='ghost' onClick={() => {fetchAllProducts();setFilterParams(null); onClose()}}>Borrar</Button>
                   </ModalFooter>
                 </Form>
@@ -469,7 +469,7 @@ const Products = () => {
                   </Field>
                   </ModalBody>
                   <ModalFooter>
-                    <Button size='sm' colorScheme='teal' mr={3} isLoading={props.isSubmitting} type="submit">Guardar</Button>
+                    <Button size='sm' colorScheme='giza' _hover={{bg:"giza.700"}} mr={3} isLoading={props.isSubmitting} type="submit">Guardar</Button>
                     <Button size='sm' variant='ghost' onClick={onCloseNew}>Cancelar</Button>
                   </ModalFooter>
                 </Form>
