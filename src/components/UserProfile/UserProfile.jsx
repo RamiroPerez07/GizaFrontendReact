@@ -35,7 +35,7 @@ const UserProfile = (props) => {
 
   return (
     <>
-    <Button leftIcon={<FaUser />} colorScheme='teal' variant='solid' onClick={onOpen} ref={btnRef}>{user.usuarioNombre}</Button>
+    <Button leftIcon={<FaUser />} colorScheme='giza' _hover={{bg:"#0087BF"}} variant='solid' onClick={onOpen} ref={btnRef}>{user.usuarioNombre}</Button>
 
       <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />

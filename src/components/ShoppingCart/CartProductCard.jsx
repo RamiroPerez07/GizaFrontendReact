@@ -5,6 +5,7 @@ import { CgMathPlus } from "react-icons/cg";
 import { FaTrash } from "react-icons/fa";
 import { addProductToCart, decreaseProductFromCart, removeProductFromCart } from '../../redux/actions/cartActions';
 import { useDispatch } from 'react-redux';
+import { formatPrice } from '../../utils/functions';
 
 const CartProductCard = (props) => {
 
@@ -29,13 +30,14 @@ const CartProductCard = (props) => {
       <div>
         <Text fontSize='sm' style={{marginLeft:"5px"}}>{descripcion}</Text>
         <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", padding:"0px 5px"}}>
-          <Text fontSize='sm'>{"$ "+precio}</Text>
+          <Text fontSize='sm'>{"$ "+formatPrice(precio)}</Text>
           <div style={{display:"flex", alignItems:"center"}}>
             <Text fontSize='sm' style={{margin:"0px 10px"}}>Cantidad</Text>
             {
               quantity > 1 ?
               <IconButton 
-                colorScheme='teal'
+                colorScheme='giza'
+                _hover={{bg:"#0087BF"}}
                 aria-label='Menos'
                 icon={<CgMathMinus />} 
                 style={{minWidth:"auto",width:"22px",height:"22px",margin:"3px"}}
@@ -43,7 +45,7 @@ const CartProductCard = (props) => {
               />:
               <IconButton 
                 colorScheme='red'
-                aria-label='Menos'
+                aria-label='Eliminar'
                 icon={<FaTrash style={{width:"10px", height:"10px"}} />} 
                 style={{minWidth:"auto",width:"22px",height:"22px",margin:"3px"}}
                 onClick = {() => onOpen()}
@@ -51,7 +53,8 @@ const CartProductCard = (props) => {
             }
             <Text fontSize='sm' w="20px" textAlign="center">{quantity}</Text>
             <IconButton 
-              colorScheme='teal'
+              colorScheme='giza'
+              _hover={{bg:"#0087BF"}}
               aria-label='Mas'
               icon={<CgMathPlus />} 
               style={{minWidth:"auto",width:"22px",height:"22px",margin:"3px"}}

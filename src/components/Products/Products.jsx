@@ -483,16 +483,20 @@ const Products = () => {
       <div style={{width: "100%", maxWidth: "900px", display:"grid",placeItems:"center"}}>
         <StyledProductsWrapper>
           {isLoadingProducts ? 
-          <Stack justifyContent="center" w="full" direction={['column', 'row']} spacing="24px">
+          <Stack alignItems="center" justifyContent="center" w="full" direction={['column', 'row']} spacing="24px">
             <Skeleton w="full" maxW="200" height='250px' />
             <Skeleton w="full" maxW="200" height='250px' />
             <Skeleton w="full" maxW="200" height='250px' />
           </Stack>
-          : products.items?.length > 0 ? products.items.map(product => (<ProductCard key={product._id} {...product} />))
-          : (<Alert status='info'>
-              <AlertIcon />
-              No hay productos que cumplan el filtro solicitado!
-            </Alert>)}
+          : (products.items?.length > 0 ? 
+              (user?.rol === ROLES.admin ? 
+              products.items.map(product => {return(<ProductCard key={product._id} {...product} />)}) :
+              products.items.filter(product => { return product.estado !== "Bloqueado"}).map(product => (<ProductCard key={product._id} {...product} />)  ) 
+              )
+            : (<Alert status='info'>
+                <AlertIcon />
+                No hay productos que cumplan el filtro solicitado!
+              </Alert>))}
         </StyledProductsWrapper>
       </div>
     </StyledProductsContainer>

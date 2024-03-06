@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyledHeroContainer } from './HeroStyles'
+import { Box, Image } from '@chakra-ui/react'
 
 const Hero = () => {
 
@@ -18,8 +19,9 @@ const Hero = () => {
 
   return (
     <StyledHeroContainer>
-      <h1 style={titleStyle}>Giza</h1>
-      <p style={textStyle}>Perfumería y cosmética</p>
+      <Box boxSize='3xs' mt="15px">
+        <Image src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1709693837/logo_Giza_Completo_nlkgrr.png' alt='Logo Giza Completo' objectFit="contain" />
+      </Box>
     </StyledHeroContainer>
   )
 }

@@ -70,7 +70,7 @@ const ShoppingCartButton = () => {
               </div>
             </div>
             <div style={{display:"flex"}}>
-              {products.length >= 1 && <Button colorScheme='teal' mr={3} onClick={onOpenBuy}>Comprar</Button>}
+              {products.length >= 1 && <Button colorScheme='giza'  _hover={{bg:"#0087BF"}} mr={3} onClick={onOpenBuy}>Comprar</Button>}
               {products.length >= 1 && <Button variant='outline' onClick={onOpenDeleteAllProducts}>Eliminar todos</Button>}
             </div>
 
@@ -110,7 +110,7 @@ const ShoppingCartButton = () => {
 
                   <AlertDialogFooter>
                     <Button ref={btnDeleteAllProductsRef} onClick={onCloseBuy}>Cancelar</Button>
-                    <Button colorScheme='teal' onClick={() => {navigate("/confirmar-orden");onCloseBuy();onClose();}} ml={3}>Si</Button>
+                    <Button colorScheme='giza' _hover={{bg:"#0087BF"}} onClick={() => {navigate("/confirmar-orden");onCloseBuy();onClose();}} ml={3}>Si</Button>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialogOverlay>

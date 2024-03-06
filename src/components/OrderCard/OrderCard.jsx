@@ -1,5 +1,6 @@
 import { Button, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
+import { formatPrice } from '../../utils/functions'
 
 const OrderCard = (props) => {
 
@@ -10,7 +11,7 @@ const OrderCard = (props) => {
       <Heading as="h3" my="5px" style={{textAlign:"center", fontSize:"0.9rem", fontWeight:"500"}} >Pedido #{String(_id).slice(2,7)}</Heading>
       <div style={{margin:"5px 0px", width:"90%"}}>
         <Text my="2px" fontSize="0.9rem">{createdAt}</Text>
-        <Text fontSize="0.9rem">{`Total: $${monto}`}</Text>
+        <Text fontSize="0.9rem">{`Total: $ ${formatPrice(monto)}`}</Text>
         <Text my="2px" fontSize="0.9rem">{estado}</Text>
       </div>
       <Button colorScheme='teal' size="xs">Ver</Button>

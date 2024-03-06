@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, Heading, Stack, CardBody, Text, Image, CardFooter, ButtonGroup, Button, Divider, useToast, IconButton, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, FormErrorMessage, Select, ModalFooter, InputRightElement, InputGroup } from '@chakra-ui/react'
+import { Card, Heading, Stack, CardBody, Text, Image, CardFooter, ButtonGroup, Button, Divider, useToast, IconButton, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, FormErrorMessage, Select, ModalFooter, InputRightElement, InputGroup, Tooltip, Icon, Tag, Box } from '@chakra-ui/react'
 import { FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart } from '../../redux/actions/cartActions';
@@ -12,6 +12,8 @@ import {errors} from "../../errors/index.js";
 import { editProduct } from '../../axios/products.js';
 import { useNavigate } from 'react-router-dom';
 import { ProductFilterContext } from '../../contexts/productContext.js';
+import { formatPrice } from '../../utils/functions.js';
+import { ImEyeBlocked } from "react-icons/im";
 
 
 const ProductCard = (props) => {
@@ -57,7 +59,14 @@ const ProductCard = (props) => {
     <>
     <Card w="full" maxW='220px'>
       <CardBody style={{padding:"15px 20px", position: "relative"}}>
-        {user?.rol === ROLES.admin && <IconButton onClick={onOpen} style={{position:"absolute", top:"15px", right:"15px", display:"grid", placeItems:"center"}} size="xs" aria-label='Editar producto' icon={<FaEdit />} />}
+        {user?.rol === ROLES.admin && <IconButton onClick={onOpen} style={{position:"absolute", top:"7px", right:"7px", display:"grid", placeItems:"center"}} size="xs" aria-label='Editar producto' icon={<FaEdit />} />}
+        {estado === "Bloqueado" && 
+          <Tooltip hasArrow label="Bloqueado">
+            <span style={{position:"absolute", top:"10px", left:"10px", display:"grid", placeItems:"center", cursor:"pointer"}}>
+              <ImEyeBlocked />
+            </span>
+          </Tooltip>
+        }
         <Image
           src= {imagen}
           alt='Imagen del producto'
@@ -70,13 +79,13 @@ const ProductCard = (props) => {
           <Heading size='xs' minH="25px">{descripcion}</Heading>
           <Text style={{fontSize:"0.7rem", fontStyle: "italic", fontWeight: "300"}}>{categoria}</Text>
           <Text style={{fontSize:"0.7rem"}}>{marca}</Text>
-          <Text as="b" color='teal.600' fontSize='s'>${precio}</Text>
+          <Text as="b" color='giza.500' fontSize='s'>$ {formatPrice(precio)}</Text>
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter style={{padding:"15px",display:"flex",justifyContent:"center",alignItems:"center"}}>
         <ButtonGroup spacing='1'>
-          <Button leftIcon={<FaCartPlus />} colorScheme='teal' variant='solid' size="sm" onClick={()=>addProduct({_id,descripcion,precio,imagen,marca})}>
+          <Button leftIcon={<FaCartPlus />} colorScheme='giza' _hover={{bg:"#0087BF"}} variant='solid' size="sm" onClick={()=>addProduct({_id,descripcion,precio,imagen,marca})}>
             Agregar al carrito
           </Button>
         </ButtonGroup>

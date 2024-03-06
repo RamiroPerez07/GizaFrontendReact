@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const StyledHeader = styled.header`
   width: 100%;
   min-height: 60px;
-  background-color: #f0f0f0;
+  background-color: #F7F7FF;
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -53,15 +53,14 @@ export const StyledNavbarSummary = styled.ul`
 
 export const NavbarItem = styled(NavLink)`
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.9;
+    font-weight: 400;
     text-decoration: none;
     color: #0f0f0f;
 
     &.active{
-        font-weight: 800;
+        font-weight: 500;
     }
-
 `
 
 

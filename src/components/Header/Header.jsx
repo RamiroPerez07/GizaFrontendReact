@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 import { StyledHeader, StyledHeaderContent, StyledNavbar, StyledNavbarContent, NavbarItem, StyledNavbarSummary } from './HeaderStyles'
-import { Avatar, IconButton, Button, Text } from '@chakra-ui/react'
+import { IconButton, Button, Text, Image } from '@chakra-ui/react'
 import { FiLogIn } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 import { useDisclosure } from '@chakra-ui/react';
@@ -24,7 +24,7 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledHeaderContent>
-          <Avatar src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1673367275/Perfarm/bg_abstract_nkcbrw.png' name="Imagen de Giza" size="md"/>
+          <Image src='https://res.cloudinary.com/dhnicvwkw/image/upload/v1709693839/logo_Giza_btneu2.png' name="Imagen de Giza" boxSize="12" objectFit="contain" />
           <StyledNavbar>
             <StyledNavbarContent>
               <NavbarItem className={({ isActive }) => (isActive ? "active" : "")} to={"/"}>Inicio</NavbarItem>
@@ -34,7 +34,7 @@ const Header = () => {
               {
                 user ?
                 <UserProfile user={user} /> :
-                <Button leftIcon={<FiLogIn />} colorScheme='teal' variant='outline' onClick={()=>{navigate("/iniciar-sesion")}}>Ingresar</Button>
+                <Button leftIcon={<FiLogIn />} colorScheme='cyan' variant='outline' onClick={()=>{navigate("/iniciar-sesion")}}>Ingresar</Button>
               }
             </StyledNavbarContent>
             <StyledNavbarSummary>
@@ -49,7 +49,7 @@ const Header = () => {
                     <NavbarItem style={{marginBottom:"15px"}} className={({ isActive }) => (isActive ? "active" : "")} to={"/"} onClick={onClose}>Inicio</NavbarItem>
                     <NavbarItem style={{marginBottom:"15px"}} className={({ isActive }) => (isActive ? "active" : "")} to={"/productos"} onClick={onClose}>Productos</NavbarItem>
                     <NavbarItem style={{marginBottom:"15px"}} className={({ isActive }) => (isActive ? "active" : "")} to={"/contacto"} onClick={onClose}>Contacto</NavbarItem>
-                    <Button style={{marginBottom:"15px"}} leftIcon={<FiLogIn />} colorScheme='teal' variant='outline' onClick={()=>{navigate("/iniciar-sesion");onClose()}}>Ingresar</Button>
+                    <Button style={{marginBottom:"15px"}} leftIcon={<FiLogIn />} colorScheme='cyan' variant='outline' onClick={()=>{navigate("/iniciar-sesion");onClose()}}>Ingresar</Button>
                   </DrawerBody>
                   <DrawerFooter>
                     <Button variant='outline' mr={3} onClick={onClose}>Salir</Button>
