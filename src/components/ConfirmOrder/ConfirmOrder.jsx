@@ -49,11 +49,15 @@ const ConfirmOrder = () => {
   const confirmOrder = async (userData) => {
     const items = products.map(product => {
       return {
-        id: product._id,
+        idProducto: product._id,
         descripcion: product.descripcion,
+        marca: product.marca,
+        categoria: product.categoria,
         precio: product.precio,
-        cantidad: product.quantity,
         imagen: product.imagen,
+        descuento: product.descuento,
+        estado: product.estado,
+        cantidad: product.quantity,
       }
     })
     try {

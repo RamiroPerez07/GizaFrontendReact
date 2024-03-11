@@ -76,7 +76,7 @@ const ProductCard = (props) => {
           margin="auto"
         />
         <Stack mt='4' spacing='2'>
-          <Heading size='xs' minH="25px">{descripcion}</Heading>
+          <Heading size='xs' minH="50px">{descripcion}</Heading>
           <Text style={{fontSize:"0.7rem", fontStyle: "italic", fontWeight: "300"}}>{categoria}</Text>
           <Text style={{fontSize:"0.7rem"}}>{marca}</Text>
           <Text as="b" color='giza.500' fontSize='s'>$ {formatPrice(precio)}</Text>
