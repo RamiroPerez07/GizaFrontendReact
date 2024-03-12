@@ -138,7 +138,11 @@ const ConfirmOrder = () => {
                 telefono: values.telefono} //se graban en el estado, los resultados de los valores ingresados al formulario
               const confirmation = await getConfirmation()
               if (!confirmation) return 
-              await confirmOrder(userData);
+              try {
+                confirmOrder(userData);                
+              } catch (error) {
+                alert("Ocurrio un error")
+              }
               actions.setSubmitting(false);
               actions.resetForm();
             }}
@@ -216,7 +220,7 @@ const ConfirmOrder = () => {
 
               <AlertDialogFooter>
                 <Button ref={cancelRef} onClick={() => {onClose(); confirmation.proceed(false)}}>Cancelar</Button>
-                <Button colorScheme='teal' onClick={async () => {onClose(); confirmation.proceed(true)}} ml={3}>Si</Button>
+                <Button colorScheme='giza' _hover={{bg:"giza.700"}} onClick={async () => {onClose(); confirmation.proceed(true)}} ml={3}>Si</Button>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialogOverlay>

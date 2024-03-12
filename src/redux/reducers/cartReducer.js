@@ -1,11 +1,10 @@
 import { CART_TYPES } from "../types/types";
-import productsData from "../../data/products.js"
 import { addProductToCart, decreaseProductFromCart, removeAllProductsFromCart, removeProductFromCart } from "../utils/cartUtils.js";
 
 
 
 const initial_state = {
-  products : [...productsData],
+  products : [],
   productsCart : [],
 }
 

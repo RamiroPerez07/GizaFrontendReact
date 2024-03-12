@@ -25,7 +25,6 @@ import {
   RangeSliderFilledTrack,
   RangeSliderThumb,
 } from '@chakra-ui/react'
-import products from '../../data/products';
 import { Field, Form, Formik } from 'formik';
 import { filterProductsSchema, newProductSchema } from '../../validationSchemas';
 import { useDispatch, useSelector } from 'react-redux';
