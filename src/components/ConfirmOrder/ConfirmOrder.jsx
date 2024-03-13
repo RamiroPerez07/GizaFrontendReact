@@ -38,8 +38,8 @@ const ConfirmOrder = () => {
 
   //con esta funcion me aseguro que cuando no hay nada en el carrito, vuelve al catalogo
   useEffect(() => {
-    const subtotal = products.reduce((prev, current)=>prev+current.quantity * current.precio,0);
-    setSubtotal(subtotal)
+    const subtotal = products.reduce((prev, current)=>prev+current.quantity * current.precio * (1-current.descuento / 100),0);
+    setSubtotal(Number(subtotal).toFixed(2))
     if (subtotal <= 0) {
       navigate("/productos")
     }

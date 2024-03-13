@@ -108,7 +108,7 @@ const OrderDetail = () => {
                   <Thead>
                     <Tr>
                       <Th>Descripcion</Th>
-                      <Th >Pu</Th>
+                      <Th isNumeric>Pu</Th>
                       <Th isNumeric>Cantidad</Th>
                       <Th isNumeric>Subtotal</Th>
                     </Tr>
@@ -119,9 +119,9 @@ const OrderDetail = () => {
                         return (
                           <Tr key={item._id}>
                             <Td>{`${item.descripcion} - ${item.marca}`}</Td>
-                            <Td>{`${formatPrice(item.precio)} - (${Number(item.descuento*100).toFixed(2)+"%"})`}</Td>
+                            <Td isNumeric>{`$ ${formatPrice(item.precio)} - (${Number(item.descuento).toFixed(2)+"%"})`}</Td>
                             <Td isNumeric>{item.cantidad}</Td>
-                            <Td isNumeric>{formatPrice(Number(item.cantidad * item.precio * (1-item.descuento)).toFixed(2))}</Td>
+                            <Td isNumeric>{"$ " + formatPrice(Number(item.cantidad * item.precio * (1-item.descuento/100)).toFixed(2))}</Td>
                           </Tr>
                         )
                       })
@@ -138,7 +138,7 @@ const OrderDetail = () => {
                       <Th isNumeric></Th>
                       <Th isNumeric>
                         <Box mt="10px">
-                          {formatPrice(orderData.monto)}
+                          {"$ "+formatPrice(orderData.monto)}
                         </Box>
                       </Th>
                     </Tr>

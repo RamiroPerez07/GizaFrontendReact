@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProductFilterContext } from '../../contexts/productContext.js';
 import { formatPrice } from '../../utils/functions.js';
 import { ImEyeBlocked } from "react-icons/im";
+import { DiscountStyled } from './utils.js';
 
 
 const ProductCard = (props) => {
@@ -79,8 +80,21 @@ const ProductCard = (props) => {
           <Heading size='xs' minH="50px">{descripcion}</Heading>
           <Text style={{fontSize:"0.7rem", fontStyle: "italic", fontWeight: "300"}}>{categoria}</Text>
           <Text style={{fontSize:"0.7rem"}}>{marca}</Text>
-          <Text as="b" color='giza.500' fontSize='s'>$ {formatPrice(precio)}</Text>
+          {
+            (props.descuento > 0) ?
+            <div style={{display:"flex", alignItems:"center", flexDirection:"row"}}>
+              <Text as="b" color='gray' fontSize='xs' mr="5px" style={{textDecoration: "line-through", textDecorationColor: "#a79d9d"}}>${formatPrice(precio)}</Text>
+              <Text as="b" color="giza.500" fontSize='s'>{`$${formatPrice(Number(props.precio*(1-props.descuento/100)).toFixed(2))}`}</Text> 
+            </div>  
+            :
+            <Text as="b" color='giza.500' fontSize='s'>${formatPrice(precio)}</Text>
+          }
+          
         </Stack>
+        {
+          (props.descuento > 0) &&
+          <DiscountStyled>{`-${props.descuento}%`}</DiscountStyled>
+        }
       </CardBody>
       <Divider borderColor='gray.300' />
       <CardFooter style={{padding:"15px",display:"flex",justifyContent:"center",alignItems:"center"}}>

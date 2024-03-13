@@ -4,7 +4,6 @@ import { addProductToCart, decreaseProductFromCart, removeAllProductsFromCart, r
 
 
 const initial_state = {
-  products : [],
   productsCart : [],
 }
 

@@ -8,6 +8,7 @@ export const theme = extendTheme({
       100: "#0f0f0f",
       500: "#00B4D8", // azul principal guiza
       700: "#0087BF", //azul hover giza
+      900: "#9627a5" //verde
     },
   }
 });
