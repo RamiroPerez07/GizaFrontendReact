@@ -1,29 +1,35 @@
 import React from 'react'
 import { Route,Routes as ReactDomRoutes } from 'react-router-dom';
-import Home from '../pages/Home';
-import Products from '../components/Products/Products';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-import VerifyUserPage from '../pages/VerifyUserPage';
-import ConfirmOrderPage from '../pages/ConfirmOrderPage';
-import OrdersPage from '../pages/OrdersPage';
-import ForgotPasswordPage from '../pages/ForgotPasswordPage';
-import RestorePasswordPage from '../pages/RestorePasswordPage';
-import ChangePasswordPage from '../pages/ChangePasswordPage';
+import Hero from "../components/Hero/Hero.jsx"
+import Products from "../components/Products/Products.jsx"
+import ConfirmOrder from "../components/ConfirmOrder/ConfirmOrder.jsx"
+import Login from "../components/Login/Login.jsx"
+import Register from "../components/Register/Register.jsx"
+import VerifyUser from "../components/VerifyUser/VerifyUser.jsx"
+import Orders from "../components/Orders/Orders.jsx"
+import ForgotPassword from "../components/ForgotPassword/ForgotPassword.jsx"
+import RestorePassword from "../components/RestorePassword/RestorePassword.jsx"
+import ChangePassword from "../components/ChangePassword/ChangePassword.jsx"
+import  OrderDetail  from '../components/OrderDetail/OrderDetail.jsx';
+
+
 
 const Routes = () => {
   return (
     <ReactDomRoutes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Hero />} />
       <Route path="/productos" element={<Products />} />
-      <Route path="/confirmar-orden" element={<ConfirmOrderPage />} />
-      <Route path="/iniciar-sesion" element={<LoginPage />} />
-      <Route path="/registro" element={<RegisterPage />} />
-      <Route path="/verificar-usuario" element={<VerifyUserPage />} />
-      <Route path="/pedidos" element={<OrdersPage />} />
-      <Route path="/olvide-mi-clave" element={<ForgotPasswordPage />} />
-      <Route path="/restablecer-clave" element={<RestorePasswordPage />} />
-      <Route path="/cambiar-clave" element={<ChangePasswordPage />} />
+      <Route path="/confirmar-orden" element={<ConfirmOrder />} />
+      <Route path="/iniciar-sesion" element={<Login />} />
+      <Route path="/registro" element={<Register />} />
+      <Route path="/verificar-usuario" element={<VerifyUser />} />
+
+      {/*pedidos*/}
+      <Route path="/pedidos" element={<Orders />} />
+      <Route path="/pedidos/:idPedido" element={<OrderDetail />} />
+      <Route path="/olvide-mi-clave" element={<ForgotPassword />} />
+      <Route path="/restablecer-clave" element={<RestorePassword />} />
+      <Route path="/cambiar-clave" element={<ChangePassword />} />
     </ReactDomRoutes>
   )
 }

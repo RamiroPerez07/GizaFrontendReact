@@ -63,7 +63,6 @@ const Orders = () => {
       if (!currentUser) return
       const response = await getOrders(currentUser)
 
-      console.log(response.data.data)
       setIsLoading(false)
 
       if (response.status === 200) {
@@ -91,7 +90,7 @@ const Orders = () => {
       <div style={{width: "100%", maxWidth: "900px", display:"grid",placeItems:"center"}}>
         <StyledOrdersWrapper>
           {isLoading &&
-          <Stack direction="row">
+          <Stack direction={{base:"column",md:"row"}}>
             <Skeleton style={{minWidth:"230px", height:'164px'}} />
             <Skeleton style={{minWidth:"230px", height:'164px'}} />
             <Skeleton style={{minWidth:"230px", height:'164px'}} />

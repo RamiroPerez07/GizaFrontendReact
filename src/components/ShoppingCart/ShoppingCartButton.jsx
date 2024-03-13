@@ -82,7 +82,7 @@ const ShoppingCartButton = () => {
               isCentered
             >
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent mx="15px">
                   <AlertDialogHeader fontSize='lg' fontWeight='bold'>Confirmación</AlertDialogHeader>
 
                   <AlertDialogBody>¿Desea eliminar todos los productos?</AlertDialogBody>
@@ -103,7 +103,7 @@ const ShoppingCartButton = () => {
               isCentered
             >
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent mx="15px">
                   <AlertDialogHeader fontSize='lg' fontWeight='bold'>Confirmación</AlertDialogHeader>
 
                   <AlertDialogBody>¿Desea continuar con la compra?</AlertDialogBody>

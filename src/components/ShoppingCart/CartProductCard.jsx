@@ -79,7 +79,7 @@ const CartProductCard = (props) => {
         isCentered
       >
         <AlertDialogOverlay>
-          <AlertDialogContent>
+          <AlertDialogContent mx="15px">
             <AlertDialogHeader fontSize='lg' fontWeight='bold'>Confirmación</AlertDialogHeader>
 
             <AlertDialogBody>{`¿Desea eliminar ${descripcion} del carrito?`}</AlertDialogBody>

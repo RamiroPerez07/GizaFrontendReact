@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import {  useDisclosure, Button,  Divider, Text, Heading, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter} from '@chakra-ui/react'
+import {  useDisclosure, Button,  Divider, Text, Heading, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, useMediaQuery, IconButton} from '@chakra-ui/react'
 
 import {
   Drawer,
@@ -32,10 +32,14 @@ const UserProfile = (props) => {
 
   const dispatch = useDispatch();
 
+  const [isLargerThan1280] = useMediaQuery('(min-width: 750px)')
 
   return (
     <>
-    <Button leftIcon={<FaUser />} colorScheme='giza' _hover={{bg:"#0087BF"}} variant='solid' onClick={onOpen} ref={btnRef}>{user.usuarioNombre}</Button>
+    {isLargerThan1280? 
+    <Button leftIcon={<FaUser />} colorScheme='giza' _hover={{bg:"giza.700"}} variant='solid' onClick={() => {onOpen()}} ref={btnRef}>{user.usuarioNombre}</Button>:
+    <IconButton icon={<FaUser />} colorScheme='giza' _hover={{bg:"giza.700"}} variant='solid' onClick={() => {onOpen()}} ref={btnRef} />
+    }
 
       <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
@@ -48,7 +52,7 @@ const UserProfile = (props) => {
           <Divider />
           <DrawerBody style={{display:"flex", flexDirection:"column"}}>
             <ChakraLink as={ReactRouterLink} to="/pedidos" mb="5px" style={{marginBottom:"5px",fontSize:"1rem"}} onClick={onClose}>Mis pedidos</ChakraLink>
-            <ChakraLink as={ReactRouterLink} to="/cambiar-clave" style={{marginBottom:"5px",fontSize:"1rem"}}>Cambiar contraseña</ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/cambiar-clave" style={{marginBottom:"5px",fontSize:"1rem"}} onClick={onClose}>Cambiar contraseña</ChakraLink>
             <ChakraLink onClick={ () => {onOpenLogout(); dispatch(removeAllProductsFromCart())}  } style={{marginBottom:"5px",fontSize:"1rem"}}>Cerrar Sesión</ChakraLink>
           </DrawerBody>
 
@@ -69,7 +73,7 @@ const UserProfile = (props) => {
         isCentered
       >
         <AlertDialogOverlay>
-          <AlertDialogContent>
+          <AlertDialogContent mx="15px">
             <AlertDialogHeader fontSize='lg' fontWeight='bold'>Confirmación</AlertDialogHeader>
 
             <AlertDialogBody>¿Deseas cerrar sesión?</AlertDialogBody>
