@@ -32,11 +32,11 @@ const UserProfile = (props) => {
 
   const dispatch = useDispatch();
 
-  const [isLargerThan1280] = useMediaQuery('(min-width: 750px)')
+  const [isLargerThan750] = useMediaQuery('(min-width: 750px)')
 
   return (
     <>
-    {isLargerThan1280? 
+    {isLargerThan750? 
     <Button leftIcon={<FaUser />} colorScheme='giza' _hover={{bg:"giza.700"}} variant='solid' onClick={() => {onOpen()}} ref={btnRef}>{user.usuarioNombre}</Button>:
     <IconButton icon={<FaUser />} colorScheme='giza' _hover={{bg:"giza.700"}} variant='solid' onClick={() => {onOpen()}} ref={btnRef} />
     }

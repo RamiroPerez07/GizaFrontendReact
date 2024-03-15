@@ -6,7 +6,7 @@ export const ROLES = {
 }
 
 export const BRAND_IMAGES = {
-  logoVerticalCompleto : "https://res.cloudinary.com/dhnicvwkw/image/upload/v1709693837/logo_Giza_Completo_nlkgrr.png",
-  logoVertical: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1709693839/logo_Giza_btneu2.png",
-  logoHorizontalCompleto: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1709759806/LOGO_horizontal_glrt92.png"
+  logoVerticalCompleto : "https://res.cloudinary.com/dhnicvwkw/image/upload/v1710537411/LOGO_GIZAtercerosombra2_nkjrwa.png",
+  logoVertical: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1710537412/Recurso_2_wfebh7.png",
+  logoHorizontalCompleto: "https://res.cloudinary.com/dhnicvwkw/image/upload/v1710537412/logo_horizontal_2_zglqec.png"
 }
