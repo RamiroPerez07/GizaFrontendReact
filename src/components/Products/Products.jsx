@@ -66,105 +66,32 @@ const Products = () => {
           setFilterData, 
           filterParams,
           filterActive,
-          setFilterActive,
+          updateFilterData,
+          isLoadingFilterData,
           setFilterParams,
           fetchAllProducts,
           filterProductsByParams,
         } = productFilterData;
 
-  // const [products , setProducts] = useState({items: []})
 
-  // const [isLoadingProducts, setIsLoadingProducts] = useState(false)
-
-  // const [filterData, setFilterData] = useState({brands: [], categories: []})
-
-  // const initialStateFilter = {categoria: "", marca: "", precioEntre: [0,100000], descripcion: ""}
-  // const [filterParams, setFilterParams] = useState(initialStateFilter)
-
-  // const initialStateFilterActive = {categoria: false, marca: false, precioEntre: false, descripcion: false}
-  // const [filterActive, setFilterActive] = useState(initialStateFilterActive)
 
   const searchRef = useRef(null)
 
+// se cargan los filtros iniciales
+
   useEffect( () => {
     const fetchAllProducts = async () => {
-      setIsLoadingProducts(true);
-      const response = await getProducts();
 
-      if (response.status === 200) {
-        setProducts({items: response.data.data})
-        
-        // en esta etapa actualizo los filtros, porque puede ser que se agregue una marca no existente
-        const marcas = response.data.data?.map(p=> p.marca).filter((brand, index, arr) => {
-          return arr.indexOf(brand) === index;
-        })
-        const categorias = response.data.data?.map(p=> p.categoria).filter((category, index, arr) => {
-          return arr.indexOf(category) === index;
-        })
-        setFilterData({brands: marcas, categories: categorias})
-        setIsLoadingProducts(false);
-        return
-      } 
-
-      alert("Ha ocurrido un error en la carga de los productos")
+      //cargo los productos filtrados con el filtro actual
+      filterProductsByParams({...filterParams})
 
     }
 
     fetchAllProducts();
 
-  }, [] /* Solo cuando el componente se monta, por eso arr vacio */)
+  }, [] ) /* Solo cuando el componente se monta, por eso arr vacio */
 
-  // const fetchAllProducts = async () => {
-  //   setIsLoadingProducts(true);
-  //     const response = await getProducts();
 
-  //     if (response.status === 200) {
-  //       setProducts({items: response.data.data})
-  //       setIsLoadingProducts(false);
-  //       setFilterParams(initialStateFilter);
-  //       setFilterActive(initialStateFilterActive);
-  //       return;
-  //     }
-  //     alert("Ha ocurrido un error en la carga de los productos")
-  // }
-
-  // const filterProductsByParams = async (values) => {
-  //   const filter = async () => {
-  //     setIsLoadingProducts(true);
-  //     const response = await filterProducts({...values});
-
-  //     if (response.status === 200) {
-  //       setProducts({items: response.data.data})
-  //       setIsLoadingProducts(false);
-  //       return
-  //     } 
-
-  //     alert("Ha ocurrido un error en la carga de los productos")
-  //   }
-
-  //   filter()
-    
-  //   let optionChosen = {}
-
-  //   if (values.descripcion !== ""){
-  //     optionChosen = {...optionChosen, descripcion: true}
-  //   } 
-  //   if (values.categoria !== ""){
-  //     optionChosen = {...optionChosen, categoria: true}
-  //   } 
-  //   if (values.marca !== "") {
-  //     optionChosen = {...optionChosen, marca: true}
-  //   }
-  //   if (values.precioEntre[0] !== 0 || values.precioEntre[1] !== 100000){
-  //     optionChosen = {...optionChosen, precioEntre: true}
-  //   }
-
-  //   console.log(optionChosen)
-
-  //   setFilterParams(values);
-  //   setFilterActive({...initialStateFilterActive, ...optionChosen})
-
-  // }
 
   return (
     <StyledProductsContainer style={{padding: "15px"}}>
@@ -175,7 +102,7 @@ const Products = () => {
             <Input placeholder='Buscar' size='md' maxW="300px" w="full" ref={searchRef} />
             <IconButton type="submit" mx="4px" icon={<FaSearch />}/>
           </form>
-          {Object.values(filterActive).some(v => v === true)? <IconButton onClick={()=>{fetchAllProducts()}} icon={<FaFilterCircleXmark />} /> : <IconButton onClick={onOpen} icon={<FaFilter />}/>}
+          {Object.values(filterActive).some(v => v === true)? <IconButton onClick={()=>{fetchAllProducts()}} icon={<FaFilterCircleXmark />} /> : <IconButton onClick={() => {onOpen(); updateFilterData()}} icon={<FaFilter />}/>}
           {user?.rol === ROLES.admin && <IconButton mx="4px" onClick={onOpenNew} icon={<VscNewFile />} />}
         </FormControl>
       </div>
@@ -229,54 +156,68 @@ const Products = () => {
               (props) => (
                 <Form style={{display:"flex", flexDirection:"column", width:"100%", alignItems:"center"}}>
                   <ModalBody px="25px" w="full">
-                  <Field name='categoria'>
-                    {({ field, form }) => (
-                      <FormControl isInvalid={form.errors.categoria && form.touched.categoria} my="15px">
-                        <FormLabel fontSize="xs">Categoria</FormLabel>
-                        <Select size="sm" {...field}>
-                          <option value="">Todas</option>
-                          {
-                            filterData.categories?.map((category,index) => {
-                              return <option key={index} value={category}>{category}</option>
-                            })
-                          }
-                        </Select> 
-                        <FormErrorMessage>{form.errors.categoria}</FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name="marca"> 
-                      {({field,form}) => (
-                        <FormControl isInvalid={form.errors.marca && form.touched.marca} my="15px">
-                        <FormLabel fontSize="xs">Marca</FormLabel>
-                        <Select size="sm" {...field}>
-                          <option value="">Todas</option>
-                          {
-                            filterData.brands?.map((brand,index) => {
-                              return <option key={index} value={brand}>{brand}</option>
-                            })
-                          }
-                        </Select> 
-                        <FormErrorMessage>{form.errors.marca}</FormErrorMessage>
-                      </FormControl>
-                      )}
-                  </Field>
-                  <Field name="precioEntre"> 
-                      {({field,form}) => (
-                        <FormControl isInvalid={form.errors.precioEntre && form.touched.precioEntre} my="15px">
-                        <FormLabel fontSize="xs">Precio</FormLabel>
-                        <Text fontSize="sm">{`Entre $ ${field?.value[0]} y $ ${field?.value[1]}`}</Text>
-                        <RangeSlider size="sm" colorScheme='giza' step={1000} min={0} max={100000} defaultValue={[field?.value[0], field?.value[1]]} onChange={(e)=>{props.setFieldValue("precioEntre", e)}}>
-                          <RangeSliderTrack>
-                            <RangeSliderFilledTrack />
-                          </RangeSliderTrack>
-                          <RangeSliderThumb bg="giza.700" index={0} />
-                          <RangeSliderThumb bg="giza.700" index={1} />
-                        </RangeSlider>
-                        <FormErrorMessage>{form.errors.precioEntre}</FormErrorMessage>
-                      </FormControl>
-                      )}
-                  </Field>
+                  { isLoadingFilterData ?
+                    <>
+                      <Stack alignItems="start" justifyContent="center" w="full" direction="column" spacing="10px">
+                        <Skeleton w="40px"  minH='15px' />
+                        <Skeleton w="full"  minH='30px' />
+                        <Skeleton w="40px"  minH='15px' />
+                        <Skeleton w="full"  minH='30px' />
+                        <Skeleton w="40px"  minH='15px' />
+                        <Skeleton w="full"  minH='30px' />
+                      </Stack>
+                    </>  :
+                    <>
+                      <Field name='categoria'>
+                        {({ field, form }) => (
+                          <FormControl isInvalid={form.errors.categoria && form.touched.categoria} my="15px">
+                            <FormLabel fontSize="xs">Categoria</FormLabel>
+                            <Select size="sm" {...field}>
+                              <option value="">Todas</option>
+                              {
+                                filterData.categories?.map((category,index) => {
+                                  return <option key={index} value={category}>{category}</option>
+                                })
+                              }
+                            </Select> 
+                            <FormErrorMessage>{form.errors.categoria}</FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field name="marca"> 
+                          {({field,form}) => (
+                            <FormControl isInvalid={form.errors.marca && form.touched.marca} my="15px">
+                            <FormLabel fontSize="xs">Marca</FormLabel>
+                            <Select size="sm" {...field}>
+                              <option value="">Todas</option>
+                              {
+                                filterData.brands?.map((brand,index) => {
+                                  return <option key={index} value={brand}>{brand}</option>
+                                })
+                              }
+                            </Select> 
+                            <FormErrorMessage>{form.errors.marca}</FormErrorMessage>
+                          </FormControl>
+                          )}
+                      </Field>
+                      <Field name="precioEntre"> 
+                          {({field,form}) => (
+                            <FormControl isInvalid={form.errors.precioEntre && form.touched.precioEntre} my="15px">
+                            <FormLabel fontSize="xs">Precio</FormLabel>
+                            <Text fontSize="sm">{`Entre $ ${field?.value[0]} y $ ${field?.value[1]}`}</Text>
+                            <RangeSlider size="sm" colorScheme='giza' step={1000} min={0} max={100000} defaultValue={[field?.value[0], field?.value[1]]} onChange={(e)=>{props.setFieldValue("precioEntre", e)}}>
+                              <RangeSliderTrack>
+                                <RangeSliderFilledTrack />
+                              </RangeSliderTrack>
+                              <RangeSliderThumb bg="giza.700" index={0} />
+                              <RangeSliderThumb bg="giza.700" index={1} />
+                            </RangeSlider>
+                            <FormErrorMessage>{form.errors.precioEntre}</FormErrorMessage>
+                          </FormControl>
+                          )}
+                      </Field>
+                    </>
+                  }
                   </ModalBody>
                   <ModalFooter>
                     <Button size='sm' colorScheme='giza' _hover={{bg:"giza.700"}} mr={3} isLoading={props.isSubmitting} type="submit" onClick={onClose}>Aplicar</Button>

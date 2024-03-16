@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import { filterProducts, getProducts } from "../axios/products";
+import { useToast } from "@chakra-ui/react";
 
 export const ProductFilterContext = createContext();
 
@@ -9,13 +10,47 @@ export const ProductFilterContextProvider = ({children}) => {
 
   const [isLoadingProducts, setIsLoadingProducts] = useState(false)
 
+  const [isLoadingFilterData, setIsLoadingFilterData] = useState(false)
+
   const [filterData, setFilterData] = useState({brands: [], categories: []})
+
+  const toast = useToast()
 
   const initialStateFilter = {categoria: "", marca: "", precioEntre: [0,100000], descripcion: ""}
   const [filterParams, setFilterParams] = useState(initialStateFilter)
 
   const initialStateFilterActive = {categoria: false, marca: false, precioEntre: false, descripcion: false}
   const [filterActive, setFilterActive] = useState(initialStateFilterActive)
+
+  const updateFilterData = async () => {
+      setIsLoadingFilterData(true);
+
+      //actualizo filtros = Marcas y categorias
+
+      const response = await getProducts();
+      
+      if (response.status === 200) {
+        
+        // en esta etapa actualizo los filtros, porque puede ser que se agregue una marca no existente
+        const marcas = response.data.data?.map(p=> p.marca).filter((brand, index, arr) => {
+          return arr.indexOf(brand) === index;
+        })
+        const categorias = response.data.data?.map(p=> p.categoria).filter((category, index, arr) => {
+          return arr.indexOf(category) === index;
+        })
+        setFilterData({brands: marcas, categories: categorias})
+        setIsLoadingFilterData(false);
+        
+      } else{
+          toast({
+            title: ``,
+            description: `Ocurrió un error en la carga de los filtros`,
+            status: "error",
+            duration: "2500",
+            isClosable: true,
+          })
+      }
+  }
 
   const fetchAllProducts = async () => {
     setIsLoadingProducts(true);
@@ -62,8 +97,6 @@ export const ProductFilterContextProvider = ({children}) => {
       optionChosen = {...optionChosen, precioEntre: true}
     }
 
-    console.log(optionChosen)
-
     setFilterParams(values);
     setFilterActive({...initialStateFilterActive, ...optionChosen})
 
@@ -84,6 +117,8 @@ export const ProductFilterContextProvider = ({children}) => {
         setFilterParams,
         fetchAllProducts,
         filterProductsByParams,
+        updateFilterData,
+        isLoadingFilterData,
       }}>{children}</ProductFilterContext.Provider>
   )
 }
