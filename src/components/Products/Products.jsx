@@ -140,7 +140,7 @@ const Products = () => {
               initialValues={{
                 categoria:"",
                 marca: "",
-                precioEntre: [0,100000],
+                precioEntre: [0,250000],
               }}
               validationSchema={filterProductsSchema}
               onSubmit={(values, actions)=>{
@@ -205,7 +205,7 @@ const Products = () => {
                             <FormControl isInvalid={form.errors.precioEntre && form.touched.precioEntre} my="15px">
                             <FormLabel fontSize="xs">Precio</FormLabel>
                             <Text fontSize="sm">{`Entre $ ${field?.value[0]} y $ ${field?.value[1]}`}</Text>
-                            <RangeSlider size="sm" colorScheme='giza' step={1000} min={0} max={100000} defaultValue={[field?.value[0], field?.value[1]]} onChange={(e)=>{props.setFieldValue("precioEntre", e)}}>
+                            <RangeSlider size="sm" colorScheme='giza' step={1000} min={0} max={250000} defaultValue={[field?.value[0], field?.value[1]]} onChange={(e)=>{props.setFieldValue("precioEntre", e)}}>
                               <RangeSliderTrack>
                                 <RangeSliderFilledTrack />
                               </RangeSliderTrack>
