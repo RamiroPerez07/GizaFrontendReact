@@ -16,7 +16,7 @@ export const ProductFilterContextProvider = ({children}) => {
 
   const toast = useToast()
 
-  const initialStateFilter = {categoria: "", marca: "", precioEntre: [0,100000], descripcion: ""}
+  const initialStateFilter = {categoria: "", marca: "", precioEntre: [0,250000], descripcion: ""}
   const [filterParams, setFilterParams] = useState(initialStateFilter)
 
   const initialStateFilterActive = {categoria: false, marca: false, precioEntre: false, descripcion: false}
@@ -93,7 +93,7 @@ export const ProductFilterContextProvider = ({children}) => {
     if (values.marca !== "") {
       optionChosen = {...optionChosen, marca: true}
     }
-    if (values.precioEntre[0] !== 0 || values.precioEntre[1] !== 100000){
+    if (values.precioEntre[0] !== 0 || values.precioEntre[1] !== 250000){
       optionChosen = {...optionChosen, precioEntre: true}
     }
 
