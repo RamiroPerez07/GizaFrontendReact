@@ -39,3 +39,26 @@ main{
   width: 100%;
   max-width: 1200px;
 }
+
+
+/* CUSTOM STYLES FOR CAROUSEL */
+
+.slick-slide > div{
+  display: grid;
+  place-items: center;
+}
+
+.slick-list{
+  padding: 10px 35px !important;
+}
+
+
+.slick-prev::before{
+  color: var(--chakra-colors-giza-500) !important;
+  opacity: 1 !important;
+}
+
+.slick-next:before{
+  color: var(--chakra-colors-giza-500) !important;
+  opacity: 1 !important;
+}
