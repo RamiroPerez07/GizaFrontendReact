@@ -38,18 +38,25 @@ li{
 main{
   width: 100%;
   max-width: 1200px;
+  display: grid;
+  align-items: start;
 }
 
 
 /* CUSTOM STYLES FOR CAROUSEL */
+
+
 
 .slick-slide > div{
   display: grid;
   place-items: center;
 }
 
+
+
+
 .slick-list{
-  padding: 10px 35px !important;
+  padding: 10px !important;
 }
 
 

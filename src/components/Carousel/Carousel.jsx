@@ -14,24 +14,29 @@ const Carousel = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 700,
     slidesToShow: 3,
     slidesToScroll: 1,
-    centerMode: true,
     arrows: true,
     autoplay: true,
     autoplaySpeed: 12000,
+    pauseOnFocus: true,
+    pauseOnHover: true,
     responsive: [
       {
         breakpoint: 1170,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
+          arrows: false,
         }
       },
       {
         breakpoint: 720,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 3,
+          arrows: false,
         }
       }
     ]
@@ -60,17 +65,25 @@ const Carousel = () => {
   const user = useSelector(state => state.user.user)
 
   return (
-    <div className='slider-container' style={{width:"100%", maxWidth:"min(850px, 80vw)"}}>
       <Slider {...settings}>
         {
           products.items?.length > 0 && 
             (user?.rol === ROLES.admin ? 
-            products.items.slice(0,9).map(product => {return(<ProductCard key={product._id} {...product} />)}) :
-            products.items.slice(0,9).filter(product => { return product.estado !== "Bloqueado"}).map(product => (<ProductCard key={product._id} {...product} />)  ) 
+            products.items.slice(0,9).map(product => {
+              return(
+                    <ProductCard key={product._id} {...product} />
+              )
+            }) :
+            products.items.slice(0,9).filter(product => { 
+              return product.estado !== "Bloqueado"}).map(product => {
+                return (
+                    <ProductCard key={product._id} {...product} />
+                )  
+              } 
+            )
             )
         }      
       </Slider>
-    </div>
   )
 }
 
