@@ -6,24 +6,22 @@
 
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: grid;
+  /* display: grid;
   width: 100%;
   min-height: 100vh;
-  justify-items: stretch;
+  justify-items: stretch; */
+  /* position: absolute; */
 }
 
 #root{
-  width: 100%;
   min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 code {
@@ -37,9 +35,10 @@ li{
 
 main{
   width: 100%;
+  flex: 1;
   max-width: 1200px;
-  display: grid;
-  align-items: start;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
 
@@ -68,4 +67,19 @@ main{
 .slick-next:before{
   color: var(--chakra-colors-giza-500) !important;
   opacity: 1 !important;
+}
+
+.slick-dots{
+  position: relative !important;
+  bottom: auto !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.slick-dots > li {
+  width: 10px !important;
+  height: 15px !important;
 }

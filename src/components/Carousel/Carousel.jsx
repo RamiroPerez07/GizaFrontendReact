@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useContext } from 'react';
 import { ProductFilterContext } from '../../contexts/productContext';
 import { ROLES } from '../../utils/constants';
+import { StyledCarouselContainer } from './Carousel.js';
 
 const Carousel = () => {
 
@@ -16,7 +17,7 @@ const Carousel = () => {
     infinite: true,
     speed: 700,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     arrows: true,
     autoplay: true,
     autoplaySpeed: 12000,
@@ -35,7 +36,7 @@ const Carousel = () => {
         breakpoint: 720,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           arrows: false,
         }
       }
@@ -65,7 +66,7 @@ const Carousel = () => {
   const user = useSelector(state => state.user.user)
 
   return (
-      <Slider {...settings}>
+      <Slider {...settings} style={{maxWidth: "800px", margin:"auto"}}>
         {
           products.items?.length > 0 && 
             (user?.rol === ROLES.admin ? 
@@ -84,7 +85,50 @@ const Carousel = () => {
             )
         }      
       </Slider>
+
+  // const productFilterData = useContext(ProductFilterContext);
+  // const { products, 
+  //         setProducts, 
+  //         isLoadingProducts, 
+  //         setIsLoadingProducts, 
+  //         filterData, 
+  //         setFilterData, 
+  //         filterParams,
+  //         filterActive,
+  //         updateFilterData,
+  //         isLoadingFilterData,
+  //         setFilterParams,
+  //         fetchAllProducts,
+  //         filterProductsByParams,
+  //       } = productFilterData;
+
+  // useEffect(()=>{
+  //   fetchAllProducts(); //llamo en principio a todos los productos
+  // },[])
+
+  // const user = useSelector(state => state.user.user)
+
+  // return (
+  //       <StyledCarouselContainer className='carousel-container'>
+  //       {
+  //         products.items?.length > 0 && 
+  //           (user?.rol === ROLES.admin ? 
+  //           products.items.slice(0,9).map(product => {
+  //             return(
+  //                   <ProductCard key={product._id} {...product} />
+  //             )
+  //           }) :
+  //           products.items.slice(0,9).filter(product => { 
+  //             return product.estado !== "Bloqueado"}).map(product => {
+  //               return (
+  //                   <ProductCard key={product._id} {...product} />
+  //               )  
+  //             } 
+  //           )
+  //           )
+  //       }      
+  //       </StyledCarouselContainer>
   )
 }
 
-export default Carousel
+export default Carousel;

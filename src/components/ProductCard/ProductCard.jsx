@@ -58,7 +58,7 @@ const ProductCard = (props) => {
 
   return (
     <>
-    <Card w="full" maxW='220px'>
+    <Card w="full" minW="210px" maxW='220px'>
       <CardBody style={{padding:"15px 20px", position: "relative"}}>
         {user?.rol === ROLES.admin && <IconButton onClick={onOpen} style={{position:"absolute", top:"7px", right:"7px", display:"grid", placeItems:"center"}} size="xs" aria-label='Editar producto' icon={<FaEdit />} />}
         {estado === "Bloqueado" && 

@@ -8,6 +8,9 @@ export const StyledFooter = styled.footer`
   align-items: center;
   background-color: #0f0f0f;
   color: white;
+  /* position: absolute;
+  bottom: 0; */
+  margin-top: auto;
 `
 
 export const StyledFooterContent = styled.div`
