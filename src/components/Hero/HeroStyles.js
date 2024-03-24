@@ -9,7 +9,7 @@ export const StyledHeroContainer = styled.div`
 
 export const StyledCategoryCard = styled.div`
   padding:2px;
-  min-width:120px;
+  width: 95%;
   font-weight:500;
   font-size:0.8rem;
   text-align:center;

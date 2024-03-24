@@ -44,7 +44,7 @@ const Hero = () => {
         <Heading as="h2" size="md" m="30px auto 15px" textAlign="center">Descuentos</Heading>
         <Carousel />
         <Heading as="h2" size="md" m="30px auto 15px" textAlign="center">Categorias</Heading>
-        <Box w="full" maxW="800px" style={{margin:"0 auto", padding:"0px 15px 15px",display:"grid", gap:"20px",gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))"}}>
+        <Box w="full" maxW="800px" style={{margin:"0 auto", padding:"0px 15px 15px",display:"grid", gap:"20px",gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))"}}>
           {
             filterData.categories.map((category, index) => {
               return (
